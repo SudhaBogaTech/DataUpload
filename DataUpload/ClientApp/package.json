@@ -1,11 +1,16 @@
 {
   "name": "dataupload",
   "version": "0.1.0",
-  "private": true,
+  "private": true,  
   "dependencies": {
+    "@babel/runtime": "7.0.0-beta.55",
+    "antd": "^4.10.0",
+    "axios": "^0.21.1",
     "bootstrap": "^4.1.3",
+    "env-cmd": "^10.1.0",
     "jquery": "^3.4.1",
     "merge": "^1.2.1",
+    "moment": "^2.29.1",   
     "oidc-client": "^1.9.0",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
@@ -13,7 +18,9 @@
     "react-router-dom": "^5.1.2",
     "react-scripts": "^3.4.1",
     "reactstrap": "^8.4.1",
-    "rimraf": "^2.6.2"
+    "reqwest": "^2.0.5",
+    "rimraf": "^2.6.2",
+    "util": "^0.12.3"
   },
   "devDependencies": {
     "ajv": "^6.9.1",
@@ -31,22 +38,27 @@
     "extends": "react-app"
   },
   "scripts": {
-    "start": "rimraf ./build && react-scripts start",
+    "start": "rimraf ./build &&react-scripts start",
+    "build:iis": "env-cmd -f .env.iis react-scripts build",
     "build": "react-scripts build",
     "test": "cross-env CI=true react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "lint": "eslint ./src/"
+    "lint": "eslint ./src/",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "browserslist": {
     "production": [
       ">0.2%",
       "not dead",
-      "not op_mini all"
+      "not op_mini all",
+      "IE 11"
     ],
     "development": [
       "last 1 chrome version",
       "last 1 firefox version",
-      "last 1 safari version"
+      "last 1 safari version",
+      "IE 11"
     ]
   }
 }
