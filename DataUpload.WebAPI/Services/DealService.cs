@@ -42,12 +42,9 @@ namespace DataUpload.Services
                 //dealService.clear();
                 await file.CopyToAsync(memoryStream);
 
-                //var catalog = new AggregateCatalog();
-                //catalog.Catalogs.Add(new DirectoryCatalog(@"C:\DealDataUpload\DataUpload\DataUpload.WebAPI\bin\Plugins", "*.dll"));
-                //var container = new CompositionContainer(catalog);
-                //container.ComposeParts(this);
+              
                 var assemblies = Directory
-                    .GetFiles(@"C:\DealDataUpload\DataUpload\DataUpload.WebAPI\bin\Plugins", "*.dll", SearchOption.AllDirectories)
+                    .GetFiles(Path.Combine(Path.GetFullPath("bin"), "Plugins"), "*.dll", SearchOption.AllDirectories)
                     .Select(AssemblyLoadContext.Default.LoadFromAssemblyPath)
                     .ToList();
                 var configuration = new ContainerConfiguration()

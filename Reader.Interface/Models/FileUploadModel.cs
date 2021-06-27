@@ -14,5 +14,6 @@ namespace Reader.Interface.Models
     public class CustomError
     {
         public string message { get; set; }
+
     }
 }

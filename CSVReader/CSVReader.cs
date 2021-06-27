@@ -89,9 +89,7 @@ namespace CSVReader
             }
             catch(Exception ex)
             {
-                //log  error here
-                errorout.message = "File is corrupt. Please contact support";
-                result.errors.Add(errorout);
+                throw ex;
             }
            
             return result;
