@@ -80,11 +80,13 @@ namespace DataUpload.WebAPI.Controllers
                 {
                     if (formFile.Length > 0)
                     {
-                        if (Path.GetExtension(formFile.FileName).ToLower() != ".csv")
+                        string fileType = Path.GetExtension(formFile.FileName).ToLower().Remove(0, 1);
+
+                        if (!_dealService.IsFileTypeSupported(fileType))
                         {
                             CustomError error = new CustomError();
 
-                            error.message = string.Format("Filename: {0} Error: {1}", formFile.FileName, "Invalid file type. supported file types are: csv");
+                            error.message = string.Format("Filename: {0} Error: {1}", formFile.FileName, "Invalid file type.");
                             errorsList.Add(error);
                         }
                         else

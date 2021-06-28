@@ -33,7 +33,23 @@ namespace DataUpload.Services
             _inMemoryDBService = dbService;
         }
 
-       
+        public bool IsFileTypeSupported(string fileType)
+        {
+            
+                var assemblies = Directory
+                       .GetFiles(Path.Combine(Path.GetFullPath("bin"), "Plugins"), "*.dll", SearchOption.AllDirectories)
+                       .Select(AssemblyLoadContext.Default.LoadFromAssemblyPath)
+                       .ToList();
+                var configuration = new ContainerConfiguration()
+                    .WithAssemblies(assemblies);
+
+                using (var container = configuration.CreateContainer())
+                {
+                    return container.GetExports<IFileReader>(fileType) != null && container.GetExports<IFileReader>(fileType).Count() > 0;
+                }
+           
+        }
+
         public async Task<List<CustomError>> UploadDealsAsync(IFormFile file)
         {
 

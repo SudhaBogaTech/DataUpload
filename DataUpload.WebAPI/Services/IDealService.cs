@@ -11,7 +11,7 @@ namespace DataUpload.Services
    public interface IDealService
     {
         List<Deal> GetAll();
-
+        bool IsFileTypeSupported(string type);
         string[] GetMostPopularVehicle();
         Task<List<CustomError>> UploadDealsAsync(IFormFile file);
 
